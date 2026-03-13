@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio – WEBUM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --black-light: #141414;
+            --black-lighter: #1a1a1a;
+            --gold: #c9a961;
+            --gold-light: #d4b978;
+            --gold-dark: #b8944f;
+            --white: #fafafa;
+            --gray: #888;
+            --gray-dark: #444;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(201, 169, 97, 0.1);
+            z-index: 1000;
+            padding: 1.5rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .nav-cta {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.75rem 2rem;
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 10rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .page-label {
+            color: var(--gold);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .page-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--white);
+            line-height: 1.2;
+        }
+
+        /* Projects */
+        .projects-section {
+            padding: 2rem 2rem 6rem;
+        }
+
+        .projects-container {
+            max-width: 50%;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: var(--black-light);
+            border: 1px solid rgba(201, 169, 97, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .project-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-display {
+            position: relative;
+            background: var(--black-lighter);
+            padding: 2rem 2rem 0 2rem;
+        }
+
+        .macbook-frame {
+            background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
+            border-radius: 12px 12px 0 0;
+            padding: 10px 10px 0 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        .macbook-screen {
+            background: var(--black);
+            border-radius: 4px 4px 0 0;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+            position: relative;
+            border: 1px solid rgba(201, 169, 97, 0.1);
+        }
+
+        .macbook-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .macbook-base {
+            height: 14px;
+            background: linear-gradient(to bottom, #2a2a2a 0%, #1a1a1a 100%);
+            border-radius: 0 0 6px 6px;
+            position: relative;
+        }
+
+        .macbook-base::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--black);
+            border-radius: 0 0 3px 3px;
+        }
+
+        .project-info {
+            padding: 2.5rem;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .project-title-group h3 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+
+        .project-tag {
+            color: var(--gold);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+        }
+
+        .btn-live {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-live:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .btn-live::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .btn-live:hover::before {
+            background: var(--black);
+        }
+
+        .project-desc {
+            color: var(--gray);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--black-light);
+            border-top: 1px solid rgba(201, 169, 97, 0.1);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-text {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-large {
+            background: var(--gold);
+            color: var(--black);
+            padding: 1.25rem 3rem;
+            text-decoration: none;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            transition: background 0.3s;
+            display: inline-block;
+        }
+
+        .btn-large:hover {
+            background: var(--gold-light);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .projects-container {
+                max-width: 70%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-container {
+                max-width: 100%;
+            }
+
+            .project-header {
+                flex-direction: column;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">WEBUM</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Úvod</a></li>
+                <li><a href="onas.html">O nás</a></li>
+                <li><a href="portfolio.html" class="active">Portfolio</a></li>
+            </ul>
+            <a href="onas.html#kontakt" class="nav-cta">Kontakt</a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <span class="page-label">Naše práce</span>
+        <h1 class="page-title">Portfolio</h1>
+    </div>
+
+    <section class="projects-section">
+        <div class="projects-container">
+            <!-- Projekt 1: Jeřáby -->
+            <div class="project-card">
+                <div class="project-display">
+                    <div class="macbook-frame">
+                        <div class="macbook-screen">
+                            <img src="https://api.microlink.io/?url=http://jerabybagry.netlify.app&screenshot=true&meta=false&embed=screenshot.url" alt="Jeřáby a Bagry - Prodej a servis stavební techniky" onerror="this.src='https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=500&fit=crop&q=80'">
+                        </div>
+                        <div class="macbook-base"></div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-header">
+                        <div class="project-title-group">
+                            <span class="project-tag">Stavební technika</span>
+                            <h3>Jeřáby a Bagry</h3>
+                        </div>
+                        <a href="http://jerabybagry.netlify.app" target="_blank" class="btn-live">Live Demo</a>
+                    </div>
+                    <p class="project-desc">
+                        Webová prezentace pro firmu zabývající se prodejem a servisem stavební techniky. Čistý design s důrazem na přehlednost nabídky a snadný kontakt. Responzivní řešení optimalizované pro vyhledávače.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Projekt 2: Barber Shop -->
+            <div class="project-card">
+                <div class="project-display">
+                    <div class="macbook-frame">
+                        <div class="macbook-screen">
+                            <img src="https://api.microlink.io/?url=http://barrbershop.netlify.app&screenshot=true&meta=false&embed=screenshot.url" alt="Barrber Shop - Pánské kadeřnictví" onerror="this.src='https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&h=500&fit=crop&q=80'">
+                        </div>
+                        <div class="macbook-base"></div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-header">
+                        <div class="project-title-group">
+                            <span class="project-tag">Služby / Lifestyle</span>
+                            <h3>Barrber Shop</h3>
+                        </div>
+                        <a href="http://barrbershop.netlify.app" target="_blank" class="btn-live">Live Demo</a>
+                    </div>
+                    <p class="project-desc">
+                        Prezentace pánského kadeřnictví s online rezervací termínů. Temná elegantní estetika odpovídající brandu, intuitivní objednávkový systém a galerie realizací. Moderní přístup k tradičnímu řemeslu.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Projekt 3: Cukrárna -->
+            <div class="project-card">
+                <div class="project-display">
+                    <div class="macbook-frame">
+                        <div class="macbook-screen">
+                            <img src="https://api.microlink.io/?url=https://cukrarnaweb.netlify.app/&screenshot=true&meta=false&embed=screenshot.url" alt="Cukrárna - Dorty a sladkosti na zakázku" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=500&fit=crop&q=80'">
+                        </div>
+                        <div class="macbook-base"></div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-header">
+                        <div class="project-title-group">
+                            <span class="project-tag">Gastronomie / E-shop</span>
+                            <h3>Cukrárna</h3>
+                        </div>
+                        <a href="https://cukrarnaweb.netlify.app/" target="_blank" class="btn-live">Live Demo</a>
+                    </div>
+                    <p class="project-desc">
+                        Webová prezentace cukrárny s možností objednávání dortů na zakázku. Lahodný vizuální design, fotogalerie produktů a jednoduchý poptávkový formulář. Optimalizováno pro lokální vyhledávání.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 class="cta-title">Máte projekt na spadnutí?</h2>
+        <p class="cta-text">
+            Pojďme společně vytvořit něco výjimečného. Rádi probereme vaše představy a najdeme ideální řešení.
+        </p>
+        <a href="onas.html#kontakt" class="btn-large">Spojme se</a>
+    </section>
+
+    <footer>
+        <div>© 2026 WEBUM</div>
+        <div class="footer-links">
+            <a href="mailto:webum@post.cz">webum@post.cz</a>
+            <a href="tel:+420733569920">+420 733 569 920</a>
+        </div>
+    </footer>
+
+</body>
+</html>

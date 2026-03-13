@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O nás – WEBUM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome pro pravé ikonky -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --black-light: #141414;
+            --black-lighter: #1a1a1a;
+            --gold: #c9a961;
+            --gold-light: #d4b978;
+            --gold-dark: #b8944f;
+            --white: #fafafa;
+            --gray: #888;
+            --gray-dark: #444;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(201, 169, 97, 0.1);
+            z-index: 1000;
+            padding: 1.5rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .nav-cta {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.75rem 2rem;
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 10rem 2rem 4rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-label {
+            color: var(--gold);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .page-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--white);
+            line-height: 1.2;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            color: var(--gray);
+            line-height: 1.9;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text strong {
+            color: var(--white);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-item {
+            background: var(--black-light);
+            border: 1px solid rgba(201, 169, 97, 0.1);
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* Tech Section v O nás */
+        .tech-section {
+            background: var(--black-light);
+            border-top: 1px solid rgba(201, 169, 97, 0.1);
+            border-bottom: 1px solid rgba(201, 169, 97, 0.1);
+            padding: 6rem 2rem;
+        }
+
+        .tech-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .section-label {
+            color: var(--gold);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--white);
+            line-height: 1.2;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            background: var(--black-lighter);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            padding: 2rem 1rem;
+            text-align: center;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .tech-item:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            transition: color 0.3s;
+        }
+
+        .tech-item:hover .tech-icon {
+            color: var(--gold-light);
+        }
+
+        .tech-icon.html5 { color: #e34c26; }
+        .tech-icon.css3 { color: #264de4; }
+        .tech-icon.js { color: #f7df1e; }
+        .tech-icon.php { color: #777bb4; }
+        .tech-icon.node { color: #339933; }
+        .tech-icon.react { color: #61dafb; }
+        .tech-icon.vue { color: #4fc08d; }
+        .tech-icon.angular { color: #dd0031; }
+        .tech-icon.python { color: #3776ab; }
+        .tech-icon.mysql { color: #00758f; }
+        .tech-icon.mongo { color: #47a248; }
+        .tech-icon.docker { color: #2496ed; }
+        .tech-icon.git { color: #f05032; }
+        .tech-icon.aws { color: #ff9900; }
+
+        .tech-name {
+            font-size: 0.85rem;
+            color: var(--white);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--black-light);
+            border-top: 1px solid rgba(201, 169, 97, 0.1);
+            border-bottom: 1px solid rgba(201, 169, 97, 0.1);
+            padding: 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 600px;
+        }
+
+        .contact-info {
+            padding: 6rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-info .section-label {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info h2 {
+            font-size: clamp(2rem, 3vw, 3rem);
+            margin-bottom: 3rem;
+            line-height: 1.2;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .contact-label {
+            color: var(--gold);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+        }
+
+        .contact-value {
+            color: var(--white);
+            font-size: 1.25rem;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .contact-value:hover {
+            color: var(--gold);
+        }
+
+        .contact-map {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            background: var(--black-lighter);
+            position: relative;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(100%) invert(92%) contrast(83%);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                padding: 4rem 2rem;
+            }
+
+            .contact-map {
+                min-height: 400px;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+
+            .tech-item {
+                padding: 1.5rem 0.5rem;
+            }
+
+            .tech-icon {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">WEBUM</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Úvod</a></li>
+                <li><a href="onas.html" class="active">O nás</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+            </ul>
+            <a href="#kontakt" class="nav-cta">Kontakt</a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <span class="page-label">Kdo jsme</span>
+        <h1 class="page-title">O nás</h1>
+    </div>
+
+    <section class="about-section">
+        <div class="about-text">
+            <p>
+                Jsme <strong>WEBUM</strong> — webové studio specializující se na tvorbu moderních webových stránek a aplikací. 
+                Naší prioritou je kvalita, funkčnost a spokojený klient.
+            </p>
+            <p>
+                Každý projekt je pro nás jedinečný. Nejsme továrna na weby — věnujeme se detailům, 
+                posloucháme vaše potřeby a tvoříme řešení, která skutečně fungují.
+            </p>
+            <p>
+                Od roku 2020 jsme realizovali desítky projektů pro klienty z různých oborů — 
+                od malých živnostníků po střední firmy. Věříme v dlouhodobou spolupráci 
+                a transparentní komunikaci.
+            </p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-item">
+                <span class="feature-icon">🎯</span>
+                <h3 class="feature-title">Na míru</h3>
+                <p class="feature-desc">Každý web je originál, vytvořený podle vašich potřeb a cílů.</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">⚡</span>
+                <h3 class="feature-title">Rychlost</h3>
+                <p class="feature-desc">Optimalizované weby, které se načítají bleskově.</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">📱</span>
+                <h3 class="feature-title">Responzivita</h3>
+                <p class="feature-desc">Perfektní zobrazení na všech zařízeních — od mobilu po desktop.</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🔍</span>
+                <h3 class="feature-title">SEO</h3>
+                <p class="feature-desc">Weby připravené pro vyhledávače od prvního řádku kódu.</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🛡️</span>
+                <h3 class="feature-title">Bezpečnost</h3>
+                <p class="feature-desc">Moderní standardy zabezpečení a pravidelné aktualizace.</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🤝</span>
+                <h3 class="feature-title">Podpora</h3>
+                <p class="feature-desc">Dlouhodobá spolupráce a technická podpora po spuštění.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNOLOGIE SEKCE - Přesunuto do O nás s pravými ikonkami -->
+    <section class="tech-section">
+        <div class="tech-container">
+            <div class="section-header">
+                <span class="section-label">Technologie</span>
+                <h2 class="section-title">V čem pracuji</h2>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <i class="fab fa-html5 tech-icon html5"></i>
+                    <span class="tech-name">HTML5</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-css3-alt tech-icon css3"></i>
+                    <span class="tech-name">CSS3</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-js tech-icon js"></i>
+                    <span class="tech-name">JavaScript</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-php tech-icon php"></i>
+                    <span class="tech-name">PHP</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-node-js tech-icon node"></i>
+                    <span class="tech-name">Node.js</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-react tech-icon react"></i>
+                    <span class="tech-name">React</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-vuejs tech-icon vue"></i>
+                    <span class="tech-name">Vue.js</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-angular tech-icon angular"></i>
+                    <span class="tech-name">Angular</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-python tech-icon python"></i>
+                    <span class="tech-name">Python</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-database tech-icon mysql"></i>
+                    <span class="tech-name">MySQL</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-leaf tech-icon mongo"></i>
+                    <span class="tech-name">MongoDB</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-docker tech-icon docker"></i>
+                    <span class="tech-name">Docker</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-git-alt tech-icon git"></i>
+                    <span class="tech-name">Git</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-aws tech-icon aws"></i>
+                    <span class="tech-name">AWS</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-sass tech-icon"></i>
+                    <span class="tech-name">Sass</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-wordpress tech-icon"></i>
+                    <span class="tech-name">WordPress</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt" class="contact-section">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <span class="section-label">Kontakt</span>
+                <h2>Kde nás najdete</h2>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <span class="contact-label">Email</span>
+                        <a href="mailto:webum@post.cz" class="contact-value">webum@post.cz</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-label">Telefon</span>
+                        <a href="tel:+420733569920" class="contact-value">+420 733 569 920</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-label">Adresa</span>
+                        <span class="contact-value">Česká republika</span>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-label">IČO</span>
+                        <span class="contact-value" style="font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--gray);">12345678</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-map">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2560.0!2d14.4378!3d50.0755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTDCsDA0JzMxLjgiNiAxNMKwMjYnMTYuMSJF!5e0!3m2!1scs!2scz!4v1234567890" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div>© 2026 WEBUM</div>
+        <div class="footer-links">
+            <a href="mailto:webum@post.cz">webum@post.cz</a>
+            <a href="tel:+420733569920">+420 733 569 920</a>
+        </div>
+    </footer>
+
+</body>
+</html>
