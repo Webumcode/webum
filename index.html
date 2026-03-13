@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -97,6 +98,7 @@
             transition: color 0.3s;
             font-weight: 500;
             position: relative;
+            cursor: pointer;
         }
 
         .nav-links a:hover,
@@ -132,6 +134,7 @@
             transition: all 0.3s;
             font-weight: 500;
             white-space: nowrap;
+            cursor: pointer;
         }
 
         .nav-cta:hover {
@@ -287,6 +290,7 @@
             transition: all 0.3s;
             font-weight: 500;
             display: inline-block;
+            cursor: pointer;
         }
 
         .btn-secondary:hover {
@@ -311,6 +315,7 @@
 
         .section-header {
             margin-bottom: 2rem;
+            text-align: center;
         }
 
         .section-label {
@@ -483,7 +488,395 @@
             line-height: 1.5;
         }
 
-        /* LOGO SCROLL SECTION - Nekonečný posuv */
+        /* About Section */
+        .about-section {
+            padding: 4rem 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .about-section.active {
+            display: block;
+        }
+
+        .about-text {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--gray);
+            line-height: 1.9;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text strong {
+            color: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background: var(--black-light);
+            border: 1px solid rgba(201, 169, 97, 0.1);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* Tech Section */
+        .tech-section {
+            background: var(--black-light);
+            border-top: 1px solid rgba(201, 169, 97, 0.1);
+            border-bottom: 1px solid rgba(201, 169, 97, 0.1);
+            padding: 4rem 1.5rem;
+            display: none;
+        }
+
+        .tech-section.active {
+            display: block;
+        }
+
+        .tech-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .tech-item {
+            background: var(--black-lighter);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .tech-item:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            transition: color 0.3s;
+        }
+
+        .tech-item:hover .tech-icon {
+            color: var(--gold-light);
+        }
+
+        .tech-icon.html5 { color: #e34c26; }
+        .tech-icon.css3 { color: #264de4; }
+        .tech-icon.js { color: #f7df1e; }
+        .tech-icon.php { color: #777bb4; }
+        .tech-icon.node { color: #339933; }
+        .tech-icon.react { color: #61dafb; }
+        .tech-icon.vue { color: #4fc08d; }
+        .tech-icon.angular { color: #dd0031; }
+        .tech-icon.python { color: #3776ab; }
+        .tech-icon.mysql { color: #00758f; }
+        .tech-icon.mongo { color: #47a248; }
+        .tech-icon.docker { color: #2496ed; }
+        .tech-icon.git { color: #f05032; }
+        .tech-icon.aws { color: #ff9900; }
+
+        .tech-name {
+            font-size: 0.75rem;
+            color: var(--white);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Portfolio Section */
+        .portfolio-section {
+            padding: 4rem 1.5rem;
+            display: none;
+        }
+
+        .portfolio-section.active {
+            display: block;
+        }
+
+        .portfolio-container {
+            max-width: 50%;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: var(--black-light);
+            border: 1px solid rgba(201, 169, 97, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .project-display {
+            position: relative;
+            background: var(--black-lighter);
+            padding: 1.5rem 1.5rem 0 1.5rem;
+        }
+
+        .macbook-frame {
+            background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
+            border-radius: 12px 12px 0 0;
+            padding: 8px 8px 0 8px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        .macbook-screen {
+            background: var(--black);
+            border-radius: 4px 4px 0 0;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+            position: relative;
+            border: 1px solid rgba(201, 169, 97, 0.1);
+        }
+
+        .macbook-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .macbook-base {
+            height: 12px;
+            background: linear-gradient(to bottom, #2a2a2a 0%, #1a1a1a 100%);
+            border-radius: 0 0 6px 6px;
+            position: relative;
+        }
+
+        .macbook-base::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: var(--black);
+            border-radius: 0 0 3px 3px;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .project-title-group h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+            color: var(--white);
+        }
+
+        .project-tag {
+            color: var(--gold);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+        }
+
+        .btn-live {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-live:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .btn-live::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .btn-live:hover::before {
+            background: var(--black);
+        }
+
+        .project-desc {
+            color: var(--gray);
+            line-height: 1.7;
+            font-size: 0.9rem;
+        }
+
+        /* Empty Project Card */
+        .project-card.empty {
+            border: 2px dashed rgba(201, 169, 97, 0.3);
+            background: transparent;
+        }
+
+        .project-card.empty .project-display {
+            background: transparent;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        .add-project {
+            color: var(--gold);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .add-project:hover {
+            transform: scale(1.1);
+        }
+
+        .empty-text {
+            color: var(--gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--black-light);
+            border-top: 1px solid rgba(201, 169, 97, 0.1);
+            border-bottom: 1px solid rgba(201, 169, 97, 0.1);
+            padding: 0;
+            display: none;
+        }
+
+        .contact-section.active {
+            display: block;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        .contact-info {
+            padding: 4rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-info .section-header {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info h2 {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .contact-label {
+            color: var(--gold);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+        }
+
+        .contact-value {
+            color: var(--white);
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .contact-value:hover {
+            color: var(--gold);
+        }
+
+        .contact-map {
+            width: 100%;
+            height: 300px;
+            background: var(--black-lighter);
+            position: relative;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(100%) invert(92%) contrast(83%);
+        }
+
+        /* Logo Scroll Section */
         .logos-section {
             padding: 4rem 0;
             background: var(--black-light);
@@ -553,7 +946,6 @@
             color: var(--gold);
         }
 
-        /* Gradient masky na okrajích */
         .logos-container::before,
         .logos-container::after {
             content: '';
@@ -714,6 +1106,121 @@
                 font-size: 0.95rem;
             }
 
+            .about-section,
+            .tech-section,
+            .portfolio-section,
+            .contact-section {
+                padding: 5rem 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+                margin-top: 4rem;
+            }
+
+            .feature-item {
+                padding: 2.5rem;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
+                margin-top: 3rem;
+            }
+
+            .tech-item {
+                padding: 2rem 1rem;
+            }
+
+            .tech-icon {
+                font-size: 3rem;
+            }
+
+            .tech-name {
+                font-size: 0.85rem;
+            }
+
+            .portfolio-container {
+                max-width: 70%;
+            }
+
+            .project-display {
+                padding: 2rem 2rem 0 2rem;
+            }
+
+            .macbook-base {
+                height: 14px;
+            }
+
+            .macbook-base::after {
+                width: 50px;
+            }
+
+            .project-info {
+                padding: 2.5rem;
+            }
+
+            .project-title-group h3 {
+                font-size: 1.75rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .project-tag {
+                font-size: 0.8rem;
+            }
+
+            .btn-live {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.8rem;
+            }
+
+            .btn-live::before {
+                width: 6px;
+                height: 6px;
+            }
+
+            .project-desc {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+
+            .project-card.empty .project-display {
+                padding: 4rem 2rem;
+            }
+
+            .add-project {
+                font-size: 4rem;
+            }
+
+            .empty-text {
+                font-size: 1rem;
+            }
+
+            .contact-info {
+                padding: 5rem;
+            }
+
+            .contact-info h2 {
+                margin-bottom: 3rem;
+            }
+
+            .contact-details {
+                gap: 2rem;
+            }
+
+            .contact-label {
+                font-size: 0.8rem;
+            }
+
+            .contact-value {
+                font-size: 1.25rem;
+            }
+
+            .contact-map {
+                height: 400px;
+            }
+
             .logos-section {
                 padding: 5rem 0;
             }
@@ -778,6 +1285,35 @@
 
             .availability-box {
                 padding: 3.5rem;
+            }
+
+            .about-section,
+            .tech-section,
+            .portfolio-section,
+            .contact-section {
+                padding: 6rem 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .portfolio-container {
+                max-width: 50%;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+                min-height: 600px;
+            }
+
+            .contact-info {
+                padding: 6rem 4rem;
+            }
+
+            .contact-map {
+                height: auto;
+                min-height: 600px;
             }
 
             .logos-section {
@@ -867,6 +1403,14 @@
                 visibility: visible;
             }
 
+            .portfolio-container {
+                max-width: 100%;
+            }
+
+            .project-header {
+                flex-direction: column;
+            }
+
             .logo-item {
                 min-width: 130px;
                 height: 50px;
@@ -893,7 +1437,7 @@
     <!-- NAVBAR -->
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="logo">WEBUM</a>
+            <a href="#" class="logo" onclick="showSection('home')">WEBUM</a>
             
             <button class="hamburger" id="hamburger" aria-label="Menu">
                 <span></span>
@@ -903,139 +1447,471 @@
 
             <div class="nav-menu" id="navMenu">
                 <ul class="nav-links">
-                    <li><a href="onas.html">O mně</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a onclick="showSection('home')" class="nav-link">Úvod</a></li>
+                    <li><a onclick="showSection('about')" class="nav-link">O mně</a></li>
+                    <li><a onclick="showSection('portfolio')" class="nav-link">Portfolio</a></li>
                 </ul>
-                <a href="onas.html#kontakt" class="nav-cta">Kontakt</a>
+                <a onclick="showSection('contact')" class="nav-cta">Kontakt</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SEKCE -->
-    <section class="hero">
-        <div class="hero-inner">
-            <span class="hero-label">Webové studio</span>
-            <h1>Weby, které <span>fungují</span></h1>
-            <p class="hero-subtitle">Profesionální vývoj na míru</p>
-            <p class="hero-text">
-                Tvořím moderní webové prezentace, e-shopy a aplikace. 
-                Bez kompromisů, s důrazem na kvalitu a výsledky.
-            </p>
-            <div class="hero-buttons">
-                <a href="portfolio.html" class="btn-primary">Prohlédnout práci</a>
-                <a href="onas.html" class="btn-secondary">Více o mně</a>
+    <!-- HOME / ÚVOD -->
+    <div id="home" class="section-content">
+        <!-- HERO SEKCE -->
+        <section class="hero">
+            <div class="hero-inner">
+                <span class="hero-label">Webové studio</span>
+                <h1>Weby, které <span>fungují</span></h1>
+                <p class="hero-subtitle">Profesionální vývoj na míru</p>
+                <p class="hero-text">
+                    Tvořím moderní webové prezentace, e-shopy a aplikace. 
+                    Bez kompromisů, s důrazem na kvalitu a výsledky.
+                </p>
+                <div class="hero-buttons">
+                    <button onclick="showSection('portfolio')" class="btn-primary">Prohlédnout práci</button>
+                    <button onclick="showSection('about')" class="btn-secondary">Více o mně</button>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- UKAZATEL VYTÍŽENOSTI 75% -->
-    <section class="availability-section">
-        <div class="availability-container">
-            <div class="section-header">
-                <span class="section-label">Aktuálně</span>
-                <h2 class="section-title">Má vytíženost</h2>
+        <!-- UKAZATEL VYTÍŽENOSTI 75% -->
+        <section class="availability-section">
+            <div class="availability-container">
+                <div class="section-header">
+                    <span class="section-label">Aktuálně</span>
+                    <h2 class="section-title">Má vytíženost</h2>
+                </div>
+                
+                <div class="availability-box">
+                    <div class="availability-header">
+                        <span class="availability-label">Kapacita projektů</span>
+                        <span class="availability-status">
+                            <span class="status-dot"></span>
+                            Aktivně pracuji
+                        </span>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <div class="progress-labels">
+                            <span>Volno</span>
+                            <span>Plně obsazeno</span>
+                        </div>
+                    </div>
+                    
+                    <div class="availability-percentage">75<span>%</span></div>
+                    
+                    <p class="availability-text">
+                        Aktuálně pracuji na několika projektech, ale stále mám kapacitu 
+                        pro nové zakázky. Ideální pro menší až střední projekty.
+                    </p>
+                    
+                    <div class="availability-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Dostupnost</div>
+                            <div class="detail-value">Mohu začít během 1–2 týdnů</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Ideální pro</div>
+                            <div class="detail-value">Webové prezentace, e-shopy, landing page</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOGA WEBŮ -->
+        <section class="logos-section">
+            <div class="logos-header">
+                <span class="section-label">Spolupráce</span>
+                <h2 class="section-title">Weby, které jsem vytvořil</h2>
             </div>
             
-            <div class="availability-box">
-                <div class="availability-header">
-                    <span class="availability-label">Kapacita projektů</span>
-                    <span class="availability-status">
-                        <span class="status-dot"></span>
-                        Aktivně pracuji
-                    </span>
+            <div class="logos-container">
+                <div class="logos-track" id="logosTrack">
+                    <div class="logo-item">
+                        <span class="logo-text">Jeřáby a Bagry</span>
+                    </div>
+                    <div class="logo-item">
+                        <span class="logo-text">Barrber Shop</span>
+                    </div>
+                    <div class="logo-item">
+                        <span class="logo-text">Cukrárna</span>
+                    </div>
+                    <div class="logo-item">
+                        <span class="logo-text">Auto Servis</span>
+                    </div>
+                    <div class="logo-item">
+                        <span class="logo-text">Fitness Pro</span>
+                    </div>
+                    <div class="logo-item">
+                        <span class="logo-text">Kavárna Město</span>
+                    </div>
+                    <div class="logo-item">
+                        <span class="logo-text">Reality Domov</span>
+                    </div>
+                    <div class="logo-item">
+                        <span class="logo-text">Pizzerie Roma</span>
+                    </div>
+                    <div class="logo-item">
+                        <span class="logo-text">Jeřáby a Bagry</span>
+                    </div>
+                    <div class="logo-item">
+                        <span class="logo-text">Barrber Shop</span>
+                    </div>
+                    <div class="logo-item">
+                        <span class="logo-text">Cukrárna</span>
+                    </div>
+                    <div class="logo-item">
+                        <span class="logo-text">Auto Servis</span>
+                    </div>
+                    <div class="logo-item">
+                        <span class="logo-text">Fitness Pro</span>
+                    </div>
+                    <div class="logo-item">
+                        <span class="logo-text">Kavárna Město</span>
+                    </div>
+                    <div class="logo-item">
+                        <span class="logo-text">Reality Domov</span>
+                    </div>
+                    <div class="logo-item">
+                        <span class="logo-text">Pizzerie Roma</span>
+                    </div>
                 </div>
-                
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
-                    </div>
-                    <div class="progress-labels">
-                        <span>Volno</span>
-                        <span>Plně obsazeno</span>
-                    </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- O MNĚ -->
+    <section id="about" class="about-section">
+        <div class="section-header">
+            <span class="section-label">Kdo jsem</span>
+            <h2 class="section-title">O mně</h2>
+        </div>
+
+        <div class="about-text">
+            <p>
+                Jsem <strong>WEBUM</strong> — webový vývojář specializující se na tvorbu moderních webových stránek a aplikací. 
+                Naší prioritou je kvalita, funkčnost a spokojený klient.
+            </p>
+            <p>
+                Každý projekt je pro mě jedinečný. Nejsem továrna na weby — věnuji se detailům, 
+                poslouchám vaše potřeby a tvořím řešení, která skutečně fungují.
+            </p>
+            <p>
+                Od roku 2020 jsem realizoval desítky projektů pro klienty z různých oborů — 
+                od malých živnostníků po střední firmy. Věřím v dlouhodobou spolupráci 
+                a transparentní komunikaci.
+            </p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-item">
+                <span class="feature-icon">🎯</span>
+                <h3 class="feature-title">Na míru</h3>
+                <p class="feature-desc">Každý web je originál, vytvořený podle vašich potřeb a cílů.</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">⚡</span>
+                <h3 class="feature-title">Rychlost</h3>
+                <p class="feature-desc">Optimalizované weby, které se načítají bleskově.</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">📱</span>
+                <h3 class="feature-title">Responzivita</h3>
+                <p class="feature-desc">Perfektní zobrazení na všech zařízeních.</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🔍</span>
+                <h3 class="feature-title">SEO</h3>
+                <p class="feature-desc">Weby připravené pro vyhledávače od prvního řádku kódu.</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🛡️</span>
+                <h3 class="feature-title">Bezpečnost</h3>
+                <p class="feature-desc">Moderní standardy zabezpečení a pravidelné aktualizace.</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🤝</span>
+                <h3 class="feature-title">Podpora</h3>
+                <p class="feature-desc">Dlouhodobá spolupráce a technická podpora po spuštění.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNOLOGIE -->
+    <section id="tech" class="tech-section">
+        <div class="tech-container">
+            <div class="section-header">
+                <span class="section-label">Technologie</span>
+                <h2 class="section-title">V čem pracuji</h2>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <i class="fab fa-html5 tech-icon html5"></i>
+                    <span class="tech-name">HTML5</span>
                 </div>
-                
-                <div class="availability-percentage">75<span>%</span></div>
-                
-                <p class="availability-text">
-                    Aktuálně pracuji na několika projektech, ale stále mám kapacitu 
-                    pro nové zakázky. Ideální pro menší až střední projekty.
-                </p>
-                
-                <div class="availability-details">
-                    <div class="detail-item">
-                        <div class="detail-label">Dostupnost</div>
-                        <div class="detail-value">Mohu začít během 1–2 týdnů</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Ideální pro</div>
-                        <div class="detail-value">Webové prezentace, e-shopy, landing page</div>
-                    </div>
+                <div class="tech-item">
+                    <i class="fab fa-css3-alt tech-icon css3"></i>
+                    <span class="tech-name">CSS3</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-js tech-icon js"></i>
+                    <span class="tech-name">JavaScript</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-php tech-icon php"></i>
+                    <span class="tech-name">PHP</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-node-js tech-icon node"></i>
+                    <span class="tech-name">Node.js</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-react tech-icon react"></i>
+                    <span class="tech-name">React</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-vuejs tech-icon vue"></i>
+                    <span class="tech-name">Vue.js</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-angular tech-icon angular"></i>
+                    <span class="tech-name">Angular</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-python tech-icon python"></i>
+                    <span class="tech-name">Python</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-database tech-icon mysql"></i>
+                    <span class="tech-name">MySQL</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-leaf tech-icon mongo"></i>
+                    <span class="tech-name">MongoDB</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-docker tech-icon docker"></i>
+                    <span class="tech-name">Docker</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-git-alt tech-icon git"></i>
+                    <span class="tech-name">Git</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-aws tech-icon aws"></i>
+                    <span class="tech-name">AWS</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-sass tech-icon"></i>
+                    <span class="tech-name">Sass</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-wordpress tech-icon"></i>
+                    <span class="tech-name">WordPress</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- LOGA WEBŮ - Automaticky posuvný pás -->
-    <section class="logos-section">
-        <div class="logos-header">
-            <span class="section-label">Spolupráce</span>
-            <h2 class="section-title">Weby, které jsem vytvořil</h2>
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="section-header">
+            <span class="section-label">Naše práce</span>
+            <h2 class="section-title">Portfolio</h2>
         </div>
-        
-        <div class="logos-container">
-            <div class="logos-track" id="logosTrack">
-                <!-- První sada log -->
-                <div class="logo-item">
-                    <span class="logo-text">Jeřáby a Bagry</span>
+
+        <div class="portfolio-container">
+            <!-- Projekt 1 -->
+            <div class="project-card">
+                <div class="project-display">
+                    <div class="macbook-frame">
+                        <div class="macbook-screen">
+                            <img src="https://api.microlink.io/?url=http://jerabybagry.netlify.app&screenshot=true&meta=false&embed=screenshot.url" alt="Jeřáby a Bagry" onerror="this.src='https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=500&fit=crop&q=80'">
+                        </div>
+                        <div class="macbook-base"></div>
+                    </div>
                 </div>
-                <div class="logo-item">
-                    <span class="logo-text">Barrber Shop</span>
+                <div class="project-info">
+                    <div class="project-header">
+                        <div class="project-title-group">
+                            <span class="project-tag">Stavební technika</span>
+                            <h3>Jeřáby a Bagry</h3>
+                        </div>
+                        <a href="http://jerabybagry.netlify.app" target="_blank" class="btn-live">Live</a>
+                    </div>
+                    <p class="project-desc">
+                        Webová prezentace pro firmu zabývající se prodejem a servisem stavební techniky. Čistý design s důrazem na přehlednost nabídky.
+                    </p>
                 </div>
-                <div class="logo-item">
-                    <span class="logo-text">Cukrárna</span>
+            </div>
+
+            <!-- Projekt 2 -->
+            <div class="project-card">
+                <div class="project-display">
+                    <div class="macbook-frame">
+                        <div class="macbook-screen">
+                            <img src="https://api.microlink.io/?url=http://barrbershop.netlify.app&screenshot=true&meta=false&embed=screenshot.url" alt="Barrber Shop" onerror="this.src='https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&h=500&fit=crop&q=80'">
+                        </div>
+                        <div class="macbook-base"></div>
+                    </div>
                 </div>
-                <div class="logo-item">
-                    <span class="logo-text">Auto Servis</span>
+                <div class="project-info">
+                    <div class="project-header">
+                        <div class="project-title-group">
+                            <span class="project-tag">Služby / Lifestyle</span>
+                            <h3>Barrber Shop</h3>
+                        </div>
+                        <a href="http://barrbershop.netlify.app" target="_blank" class="btn-live">Live</a>
+                    </div>
+                    <p class="project-desc">
+                        Prezentace pánského kadeřnictví s online rezervací. Temná elegantní estetika odpovídající brandu.
+                    </p>
                 </div>
-                <div class="logo-item">
-                    <span class="logo-text">Fitness Pro</span>
+            </div>
+
+            <!-- Projekt 3 -->
+            <div class="project-card">
+                <div class="project-display">
+                    <div class="macbook-frame">
+                        <div class="macbook-screen">
+                            <img src="https://api.microlink.io/?url=https://cukrarnaweb.netlify.app/&screenshot=true&meta=false&embed=screenshot.url" alt="Cukrárna" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=500&fit=crop&q=80'">
+                        </div>
+                        <div class="macbook-base"></div>
+                    </div>
                 </div>
-                <div class="logo-item">
-                    <span class="logo-text">Kavárna Město</span>
+                <div class="project-info">
+                    <div class="project-header">
+                        <div class="project-title-group">
+                            <span class="project-tag">Gastronomie</span>
+                            <h3>Cukrárna</h3>
+                        </div>
+                        <a href="https://cukrarnaweb.netlify.app/" target="_blank" class="btn-live">Live</a>
+                    </div>
+                    <p class="project-desc">
+                        Webová prezentace cukrárny s možností objednávání dortů na zakázku. Lahodný vizuální design.
+                    </p>
                 </div>
-                <div class="logo-item">
-                    <span class="logo-text">Reality Domov</span>
+            </div>
+
+            <!-- PRÁZDNÝ PROJEKT 4 -->
+            <div class="project-card">
+                <div class="project-display">
+                    <div class="macbook-frame">
+                        <div class="macbook-screen">
+                            <img src="" alt="Název projektu" onerror="this.style.display='none'; this.parentElement.style.background='var(--black-lighter)'; this.parentElement.innerHTML='<span style=\'color:var(--gray); font-size:0.9rem;\'>Screenshot</span>';">
+                        </div>
+                        <div class="macbook-base"></div>
+                    </div>
                 </div>
-                <div class="logo-item">
-                    <span class="logo-text">Pizzerie Roma</span>
+                <div class="project-info">
+                    <div class="project-header">
+                        <div class="project-title-group">
+                            <span class="project-tag">Kategorie</span>
+                            <h3>Název projektu</h3>
+                        </div>
+                        <a href="#" target="_blank" class="btn-live">Live</a>
+                    </div>
+                    <p class="project-desc">
+                        Popis projektu. Stručně shrň, co jsi vytvořil a jaké byly hlavní výzvy nebo specifika.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PRÁZDNÝ PROJEKT 5 -->
+            <div class="project-card">
+                <div class="project-display">
+                    <div class="macbook-frame">
+                        <div class="macbook-screen">
+                            <img src="" alt="Název projektu" onerror="this.style.display='none'; this.parentElement.style.background='var(--black-lighter)'; this.parentElement.innerHTML='<span style=\'color:var(--gray); font-size:0.9rem;\'>Screenshot</span>';">
+                        </div>
+                        <div class="macbook-base"></div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-header">
+                        <div class="project-title-group">
+                            <span class="project-tag">Kategorie</span>
+                            <h3>Název projektu</h3>
+                        </div>
+                        <a href="#" target="_blank" class="btn-live">Live</a>
+                    </div>
+                    <p class="project-desc">
+                        Popis projektu. Stručně shrň, co jsi vytvořil a jaké byly hlavní výzvy nebo specifika.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PRÁZDNÝ PROJEKT 6 -->
+            <div class="project-card">
+                <div class="project-display">
+                    <div class="macbook-frame">
+                        <div class="macbook-screen">
+                            <img src="" alt="Název projektu" onerror="this.style.display='none'; this.parentElement.style.background='var(--black-lighter)'; this.parentElement.innerHTML='<span style=\'color:var(--gray); font-size:0.9rem;\'>Screenshot</span>';">
+                        </div>
+                        <div class="macbook-base"></div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-header">
+                        <div class="project-title-group">
+                            <span class="project-tag">Kategorie</span>
+                            <h3>Název projektu</h3>
+                        </div>
+                        <a href="#" target="_blank" class="btn-live">Live</a>
+                    </div>
+                    <p class="project-desc">
+                        Popis projektu. Stručně shrň, co jsi vytvořil a jaké byly hlavní výzvy nebo specifika.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section id="contact" class="contact-section">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="section-header">
+                    <span class="section-label">Kontakt</span>
+                    <h2>Kde mě najdete</h2>
                 </div>
                 
-                <!-- Druhá sada log (duplikát pro nekonečný loop) -->
-                <div class="logo-item">
-                    <span class="logo-text">Jeřáby a Bagry</span>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <span class="contact-label">Email</span>
+                        <a href="mailto:webum@post.cz" class="contact-value">webum@post.cz</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-label">Telefon</span>
+                        <a href="tel:+420733569920" class="contact-value">+420 733 569 920</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-label">Adresa</span>
+                        <span class="contact-value">Česká republika</span>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-label">IČO</span>
+                        <span class="contact-value" style="font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--gray);">12345678</span>
+                    </div>
                 </div>
-                <div class="logo-item">
-                    <span class="logo-text">Barrber Shop</span>
-                </div>
-                <div class="logo-item">
-                    <span class="logo-text">Cukrárna</span>
-                </div>
-                <div class="logo-item">
-                    <span class="logo-text">Auto Servis</span>
-                </div>
-                <div class="logo-item">
-                    <span class="logo-text">Fitness Pro</span>
-                </div>
-                <div class="logo-item">
-                    <span class="logo-text">Kavárna Město</span>
-                </div>
-                <div class="logo-item">
-                    <span class="logo-text">Reality Domov</span>
-                </div>
-                <div class="logo-item">
-                    <span class="logo-text">Pizzerie Roma</span>
-                </div>
+            </div>
+            
+            <div class="contact-map">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2560.0!2d14.4378!3d50.0755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTDCsDA0JzMxLjgiNiAxNMKwMjYnMTYuMSJF!5e0!3m2!1scs!2scz!4v1234567890" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
         </div>
     </section>
@@ -1065,7 +1941,7 @@
         overlay.addEventListener('click', toggleMenu);
 
         // Close menu when clicking on a link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
+        document.querySelectorAll('.nav-menu a, .nav-menu button').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
@@ -1074,15 +1950,43 @@
             });
         });
 
-        // Close menu on window resize if open
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 767 && navMenu.classList.contains('active')) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
+        // Section switching
+        function showSection(sectionName) {
+            // Hide all sections
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('about').classList.remove('active');
+            document.getElementById('tech').classList.remove('active');
+            document.getElementById('portfolio').classList.remove('active');
+            document.getElementById('contact').classList.remove('active');
+            
+            // Show selected section
+            if (sectionName === 'home') {
+                document.getElementById('home').style.display = 'block';
+            } else if (sectionName === 'about') {
+                document.getElementById('about').classList.add('active');
+                document.getElementById('tech').classList.add('active');
+            } else if (sectionName === 'portfolio') {
+                document.getElementById('portfolio').classList.add('active');
+            } else if (sectionName === 'contact') {
+                document.getElementById('contact').classList.add('active');
             }
-        });
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            if (sectionName === 'home') {
+                document.querySelector('a[onclick="showSection(\'home\')"]').classList.add('active');
+            } else if (sectionName === 'about') {
+                document.querySelector('a[onclick="showSection(\'about\')"]').classList.add('active');
+            } else if (sectionName === 'portfolio') {
+                document.querySelector('a[onclick="showSection(\'portfolio\')"]').classList.add('active');
+            }
+        }
 
         // Logos track - pause on hover
         const logosTrack = document.getElementById('logosTrack');
@@ -1093,6 +1997,16 @@
         
         logosTrack.addEventListener('mouseleave', () => {
             logosTrack.style.animationPlayState = 'running';
+        });
+
+        // Close menu on window resize if open
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 767 && navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         });
     </script>
 
