@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>WEBUM – Profesionální webové stránky na míru</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,12 +26,17 @@
             --gray-dark: #444;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--black);
             color: var(--white);
             line-height: 1.6;
             font-weight: 400;
+            overflow-x: hidden;
         }
 
         h1, h2, h3, .font-serif {
@@ -45,17 +50,17 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(10, 10, 10, 0.98);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(201, 169, 97, 0.1);
             z-index: 1000;
-            padding: 1.5rem 0;
+            padding: 1rem 0;
         }
 
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -63,27 +68,35 @@
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 600;
             color: var(--gold);
             text-decoration: none;
             letter-spacing: 0.1em;
+            z-index: 1001;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 3rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
         .nav-links a {
             color: var(--gray);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             transition: color 0.3s;
             font-weight: 500;
+            position: relative;
         }
 
         .nav-links a:hover,
@@ -91,22 +104,73 @@
             color: var(--gold);
         }
 
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
         .nav-cta {
             background: transparent;
             border: 1px solid var(--gold);
             color: var(--gold);
-            padding: 0.75rem 2rem;
+            padding: 0.6rem 1.5rem;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             transition: all 0.3s;
             font-weight: 500;
+            white-space: nowrap;
         }
 
         .nav-cta:hover {
             background: var(--gold);
             color: var(--black);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
         }
 
         /* Hero Section */
@@ -115,7 +179,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 8rem 2rem 4rem;
+            padding: 7rem 1.5rem 3rem;
             position: relative;
             overflow: hidden;
         }
@@ -126,15 +190,17 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
+            width: 80vw;
+            height: 80vw;
+            max-width: 600px;
+            max-height: 600px;
             background: radial-gradient(circle, rgba(201, 169, 97, 0.1) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
         }
 
         .hero-inner {
-            max-width: 700px;
+            max-width: 800px;
             width: 100%;
             text-align: center;
             position: relative;
@@ -143,18 +209,18 @@
 
         .hero-label {
             color: var(--gold);
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.3em;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             display: block;
             font-weight: 500;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 6vw, 5rem);
+            font-size: clamp(2rem, 8vw, 4rem);
             line-height: 1.1;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             color: var(--white);
             letter-spacing: -0.03em;
         }
@@ -165,26 +231,26 @@
         }
 
         .hero-subtitle {
-            font-size: 1.5rem;
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
             color: var(--gray);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             font-weight: 300;
         }
 
         .hero-text {
-            font-size: 1.1rem;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
             color: var(--gray);
-            margin-bottom: 3rem;
-            line-height: 1.9;
+            margin-bottom: 2rem;
+            line-height: 1.8;
             font-weight: 300;
-            max-width: 550px;
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -192,15 +258,16 @@
         .btn-primary {
             background: var(--gold);
             color: var(--black);
-            padding: 1.1rem 2.5rem;
+            padding: 0.9rem 2rem;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             font-weight: 600;
             transition: all 0.3s;
             border: none;
             cursor: pointer;
+            display: inline-block;
         }
 
         .btn-primary:hover {
@@ -211,14 +278,15 @@
         .btn-secondary {
             background: transparent;
             color: var(--white);
-            padding: 1.1rem 2.5rem;
+            padding: 0.9rem 2rem;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             border: 1px solid var(--gray-dark);
             transition: all 0.3s;
             font-weight: 500;
+            display: inline-block;
         }
 
         .btn-secondary:hover {
@@ -230,7 +298,7 @@
         /* Availability Section */
         .availability-section {
             background: linear-gradient(135deg, var(--black-light) 0%, var(--black) 100%);
-            padding: 6rem 2rem;
+            padding: 4rem 1.5rem;
             border-top: 1px solid rgba(201, 169, 97, 0.1);
             border-bottom: 1px solid rgba(201, 169, 97, 0.1);
         }
@@ -242,21 +310,21 @@
         }
 
         .section-header {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .section-label {
             color: var(--gold);
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.2em;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             display: block;
             font-weight: 500;
         }
 
         .section-title {
-            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
             color: var(--white);
             line-height: 1.2;
         }
@@ -264,7 +332,7 @@
         .availability-box {
             background: var(--black-lighter);
             border: 1px solid rgba(201, 169, 97, 0.2);
-            padding: 3.5rem 3rem;
+            padding: 2rem 1.5rem;
             position: relative;
             overflow: hidden;
         }
@@ -283,11 +351,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .availability-label {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--gray);
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -297,7 +367,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--gold);
             font-weight: 600;
             text-transform: uppercase;
@@ -305,8 +375,8 @@
         }
 
         .status-dot {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             background: var(--gold);
             border-radius: 50%;
             animation: pulse 2s infinite;
@@ -318,14 +388,14 @@
         }
 
         .progress-container {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .progress-bar {
             width: 100%;
-            height: 20px;
+            height: 16px;
             background: var(--black);
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
             position: relative;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
@@ -335,7 +405,7 @@
             height: 100%;
             width: 75%;
             background: linear-gradient(90deg, var(--gold-dark) 0%, var(--gold) 50%, var(--gold-light) 100%);
-            border-radius: 10px;
+            border-radius: 8px;
             transition: width 1.5s ease-out;
             position: relative;
         }
@@ -359,14 +429,14 @@
         .progress-labels {
             display: flex;
             justify-content: space-between;
-            margin-top: 0.75rem;
-            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
             color: var(--gray);
         }
 
         .availability-percentage {
             font-family: 'Playfair Display', serif;
-            font-size: 5rem;
+            font-size: clamp(3rem, 10vw, 5rem);
             color: var(--gold);
             line-height: 1;
             margin-bottom: 0.5rem;
@@ -374,32 +444,32 @@
         }
 
         .availability-percentage span {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 5vw, 2rem);
             color: var(--gray);
         }
 
         .availability-text {
             color: var(--gray);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            margin-bottom: 1.5rem;
             line-height: 1.7;
         }
 
         .availability-details {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
-            padding-top: 2rem;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
             border-top: 1px solid rgba(201, 169, 97, 0.1);
         }
 
         .detail-item {
-            text-align: left;
+            text-align: center;
         }
 
         .detail-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--gold);
             text-transform: uppercase;
             letter-spacing: 0.15em;
@@ -408,102 +478,123 @@
         }
 
         .detail-value {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--white);
             line-height: 1.5;
         }
 
-        /* Quick Links Section */
-        .quick-links {
-            padding: 5rem 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .link-card {
+        /* LOGO SCROLL SECTION - Nekonečný posuv */
+        .logos-section {
+            padding: 4rem 0;
             background: var(--black-light);
-            border: 1px solid rgba(201, 169, 97, 0.1);
-            padding: 2.5rem;
-            text-decoration: none;
-            color: var(--white);
-            transition: all 0.3s;
-            position: relative;
+            border-top: 1px solid rgba(201, 169, 97, 0.1);
+            border-bottom: 1px solid rgba(201, 169, 97, 0.1);
+            overflow: hidden;
         }
 
-        .link-card::before {
+        .logos-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 0 1.5rem;
+        }
+
+        .logos-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .logos-track {
+            display: flex;
+            gap: 4rem;
+            animation: scroll 30s linear infinite;
+            width: max-content;
+        }
+
+        .logos-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .logo-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 150px;
+            height: 60px;
+            padding: 0 2rem;
+            background: var(--black-lighter);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            transition: all 0.3s;
+        }
+
+        .logo-item:hover {
+            border-color: var(--gold);
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--gray);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: color 0.3s;
+        }
+
+        .logo-item:hover .logo-text {
+            color: var(--gold);
+        }
+
+        /* Gradient masky na okrajích */
+        .logos-container::before,
+        .logos-container::after {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            width: 3px;
-            height: 0;
-            background: var(--gold);
-            transition: height 0.3s;
-        }
-
-        .link-card:hover {
-            border-color: var(--gold);
-            transform: translateX(5px);
-        }
-
-        .link-card:hover::before {
+            width: 100px;
             height: 100%;
+            z-index: 2;
+            pointer-events: none;
         }
 
-        .link-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            display: block;
+        .logos-container::before {
+            left: 0;
+            background: linear-gradient(to right, var(--black-light), transparent);
         }
 
-        .link-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.75rem;
-            color: var(--white);
-        }
-
-        .link-desc {
-            font-size: 0.95rem;
-            color: var(--gray);
-            line-height: 1.6;
-        }
-
-        .link-arrow {
-            position: absolute;
-            bottom: 2rem;
-            right: 2rem;
-            color: var(--gold);
-            font-size: 1.5rem;
-            transition: transform 0.3s;
-        }
-
-        .link-card:hover .link-arrow {
-            transform: translateX(5px);
+        .logos-container::after {
+            right: 0;
+            background: linear-gradient(to left, var(--black-light), transparent);
         }
 
         /* Footer */
         footer {
-            padding: 3rem 2rem;
+            padding: 2rem 1.5rem;
             max-width: 1400px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
             align-items: center;
             color: var(--gray);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+            text-align: center;
         }
 
         .footer-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .footer-links a {
@@ -516,66 +607,307 @@
             color: var(--gold);
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .nav-links {
-                display: none;
+        /* TABLET (768px - 1024px) */
+        @media (min-width: 768px) {
+            .nav-container {
+                padding: 0 2rem;
             }
 
-            .availability-details {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+            .logo {
+                font-size: 1.75rem;
             }
 
-            .links-grid {
-                grid-template-columns: 1fr;
+            .hero {
+                padding: 8rem 2rem 4rem;
             }
-        }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+            .hero-label {
+                font-size: 0.85rem;
+                margin-bottom: 2rem;
             }
 
             .hero-subtitle {
-                font-size: 1.2rem;
+                margin-bottom: 2rem;
+            }
+
+            .hero-text {
+                margin-bottom: 3rem;
+            }
+
+            .hero-buttons {
+                gap: 1.5rem;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                padding: 1rem 2.5rem;
+                font-size: 0.9rem;
+            }
+
+            .availability-section {
+                padding: 5rem 2rem;
+            }
+
+            .section-header {
+                margin-bottom: 3rem;
+            }
+
+            .section-label {
+                font-size: 0.85rem;
             }
 
             .availability-box {
-                padding: 2.5rem 1.5rem;
+                padding: 3rem;
             }
 
-            .availability-percentage {
-                font-size: 3.5rem;
+            .availability-header {
+                margin-bottom: 2rem;
             }
 
-            .availability-percentage span {
-                font-size: 1.5rem;
+            .availability-label {
+                font-size: 0.9rem;
+            }
+
+            .availability-status {
+                font-size: 0.85rem;
+            }
+
+            .status-dot {
+                width: 8px;
+                height: 8px;
+            }
+
+            .progress-bar {
+                height: 20px;
+                border-radius: 10px;
+            }
+
+            .progress-fill {
+                border-radius: 10px;
+            }
+
+            .progress-labels {
+                font-size: 0.8rem;
+                margin-top: 0.75rem;
+            }
+
+            .availability-text {
+                margin-bottom: 2rem;
+            }
+
+            .availability-details {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+                margin-top: 2rem;
+                padding-top: 2rem;
+            }
+
+            .detail-item {
+                text-align: left;
+            }
+
+            .detail-label {
+                font-size: 0.75rem;
+            }
+
+            .detail-value {
+                font-size: 0.95rem;
+            }
+
+            .logos-section {
+                padding: 5rem 0;
+            }
+
+            .logos-header {
+                margin-bottom: 4rem;
+            }
+
+            .logo-item {
+                min-width: 180px;
+                height: 70px;
+                padding: 0 2.5rem;
+            }
+
+            .logo-text {
+                font-size: 1.25rem;
+            }
+
+            .logos-container::before,
+            .logos-container::after {
+                width: 150px;
             }
 
             footer {
-                flex-direction: column;
-                gap: 1.5rem;
-                text-align: center;
+                padding: 3rem 2rem;
+                flex-direction: row;
+                justify-content: space-between;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* DESKTOP (1024px+) */
+        @media (min-width: 1024px) {
+            nav {
+                padding: 1.5rem 0;
             }
 
-            .link-card {
-                padding: 2rem;
+            .nav-links {
+                gap: 3rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .nav-cta {
+                padding: 0.75rem 2rem;
+                font-size: 0.85rem;
+            }
+
+            .hero h1 {
+                font-size: 4.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+
+            .availability-container {
+                max-width: 700px;
+            }
+
+            .availability-box {
+                padding: 3.5rem;
+            }
+
+            .logos-section {
+                padding: 6rem 0;
+            }
+
+            .logo-item {
+                min-width: 200px;
+                height: 80px;
+                padding: 0 3rem;
+            }
+
+            .logo-text {
+                font-size: 1.4rem;
+            }
+
+            .logos-container::before,
+            .logos-container::after {
+                width: 200px;
+            }
+        }
+
+        /* MOBILE MENU */
+        @media (max-width: 767px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--black-light);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 5rem 2rem 2rem;
+                gap: 2rem;
+                transition: right 0.3s ease;
+                border-left: 1px solid rgba(201, 169, 97, 0.2);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1.5rem;
+                width: 100%;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+                padding: 0.5rem 0;
+                display: block;
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+
+            .nav-cta {
+                width: 100%;
+                text-align: center;
+                margin-top: 1rem;
+                padding: 1rem;
+            }
+
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s;
+                z-index: 999;
+            }
+
+            .overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .logo-item {
+                min-width: 130px;
+                height: 50px;
+                padding: 0 1.5rem;
+            }
+
+            .logo-text {
+                font-size: 1rem;
+            }
+
+            .logos-track {
+                gap: 2rem;
+                animation: scroll 20s linear infinite;
             }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
 
-    <!-- NAVBAR: O mně, Portfolio + tlačítko Kontakt -->
+    <!-- Overlay pro mobilní menu -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- NAVBAR -->
     <nav>
         <div class="nav-container">
             <a href="index.html" class="logo">WEBUM</a>
-            <ul class="nav-links">
-                <li><a href="onas.html">O mně</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-            </ul>
-            <a href="onas.html#kontakt" class="nav-cta">Kontakt</a>
+            
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-links">
+                    <li><a href="onas.html">O mně</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                </ul>
+                <a href="onas.html#kontakt" class="nav-cta">Kontakt</a>
+            </div>
         </div>
     </nav>
 
@@ -587,7 +919,7 @@
             <p class="hero-subtitle">Profesionální vývoj na míru</p>
             <p class="hero-text">
                 Tvořím moderní webové prezentace, e-shopy a aplikace. 
-                Bez kompromisů, s důrazem na kvalitu a výsledky, které posouvají váš byznys vpřed.
+                Bez kompromisů, s důrazem na kvalitu a výsledky.
             </p>
             <div class="hero-buttons">
                 <a href="portfolio.html" class="btn-primary">Prohlédnout práci</a>
@@ -644,27 +976,67 @@
         </div>
     </section>
 
-    <!-- RYCHLÉ ODKAZY -->
-    <section class="quick-links">
-        <div class="section-header">
-            <span class="section-label">Prozkoumejte</span>
-            <h2 class="section-title">Kam dál?</h2>
+    <!-- LOGA WEBŮ - Automaticky posuvný pás -->
+    <section class="logos-section">
+        <div class="logos-header">
+            <span class="section-label">Spolupráce</span>
+            <h2 class="section-title">Weby, které jsem vytvořil</h2>
         </div>
         
-        <div class="links-grid">
-            <a href="onas.html" class="link-card">
-                <span class="link-icon">👤</span>
-                <h3 class="link-title">O mně</h3>
-                <p class="link-desc">Technologie, zkušenosti a přístup k práci. Všechny důležité informace na jednom místě.</p>
-                <span class="link-arrow">→</span>
-            </a>
-            
-            <a href="portfolio.html" class="link-card">
-                <span class="link-icon">💼</span>
-                <h3 class="link-title">Portfolio</h3>
-                <p class="link-desc">Realizované projekty pro klienty z různých oborů. Podívejte se, co umím vytvořit.</p>
-                <span class="link-arrow">→</span>
-            </a>
+        <div class="logos-container">
+            <div class="logos-track" id="logosTrack">
+                <!-- První sada log -->
+                <div class="logo-item">
+                    <span class="logo-text">Jeřáby a Bagry</span>
+                </div>
+                <div class="logo-item">
+                    <span class="logo-text">Barrber Shop</span>
+                </div>
+                <div class="logo-item">
+                    <span class="logo-text">Cukrárna</span>
+                </div>
+                <div class="logo-item">
+                    <span class="logo-text">Auto Servis</span>
+                </div>
+                <div class="logo-item">
+                    <span class="logo-text">Fitness Pro</span>
+                </div>
+                <div class="logo-item">
+                    <span class="logo-text">Kavárna Město</span>
+                </div>
+                <div class="logo-item">
+                    <span class="logo-text">Reality Domov</span>
+                </div>
+                <div class="logo-item">
+                    <span class="logo-text">Pizzerie Roma</span>
+                </div>
+                
+                <!-- Druhá sada log (duplikát pro nekonečný loop) -->
+                <div class="logo-item">
+                    <span class="logo-text">Jeřáby a Bagry</span>
+                </div>
+                <div class="logo-item">
+                    <span class="logo-text">Barrber Shop</span>
+                </div>
+                <div class="logo-item">
+                    <span class="logo-text">Cukrárna</span>
+                </div>
+                <div class="logo-item">
+                    <span class="logo-text">Auto Servis</span>
+                </div>
+                <div class="logo-item">
+                    <span class="logo-text">Fitness Pro</span>
+                </div>
+                <div class="logo-item">
+                    <span class="logo-text">Kavárna Město</span>
+                </div>
+                <div class="logo-item">
+                    <span class="logo-text">Reality Domov</span>
+                </div>
+                <div class="logo-item">
+                    <span class="logo-text">Pizzerie Roma</span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -675,6 +1047,54 @@
             <a href="tel:+420733569920">+420 733 569 920</a>
         </div>
     </footer>
+
+    <script>
+        // Hamburger menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close menu on window resize if open
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 767 && navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Logos track - pause on hover
+        const logosTrack = document.getElementById('logosTrack');
+        
+        logosTrack.addEventListener('mouseenter', () => {
+            logosTrack.style.animationPlayState = 'paused';
+        });
+        
+        logosTrack.addEventListener('mouseleave', () => {
+            logosTrack.style.animationPlayState = 'running';
+        });
+    </script>
 
 </body>
 </html>
